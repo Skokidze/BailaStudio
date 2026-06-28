@@ -132,7 +132,7 @@ section {
   z-index:2;
 }
 .section-pad {
-  padding:120px 0
+  padding:80px 0
 }
 .shead {
   max-width:720px;
@@ -569,7 +569,9 @@ section {
   background-size:cover;
   background-position:center;
   opacity:.07;
-  mix-blend-mode:screen
+  mix-blend-mode:screen;
+  -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
 }
 #directions .wrap {
   position:relative;
@@ -1093,7 +1095,7 @@ footer {
     padding:12px 20px
   }
   .section-pad {
-    padding:84px 0
+    padding:50px 0
   }
   .dir-grid,.t-grid {
     grid-template-columns:1fr
