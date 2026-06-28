@@ -128,7 +128,8 @@ p {
   transform:translateY(-3px)
 }
 section {
-  position:relative
+  position:relative;
+  z-index:2;
 }
 .section-pad {
   padding:120px 0
@@ -235,6 +236,15 @@ section {
   background:var(--cream);
   transition:.3s
 }
+.burger.open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.burger.open span:nth-child(2) {
+  opacity: 0;
+}
+.burger.open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
 /* ---------- hero ---------- */
 #hero {
   min-height:100svh;
@@ -270,7 +280,7 @@ section {
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: -1;
+  z-index: 2;
   overflow: visible;
 }
 @media(max-width:768px) {
@@ -491,7 +501,7 @@ section {
   padding:36px 28px;
   border-radius:18px;
   border:1px solid var(--line-2);
-  background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.012));
+  background:linear-gradient(180deg,var(--ink-3),var(--ink));
   overflow:hidden;
   transition:transform .5s var(--ease),border-color .5s,box-shadow .5s;
   display:flex;
@@ -575,7 +585,7 @@ section {
   padding:42px 34px 38px;
   border-radius:18px;
   border:1px solid var(--line-2);
-  background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.012));
+  background:linear-gradient(180deg,var(--ink-3),var(--ink));
   overflow:hidden;
   transition:transform .5s var(--ease),border-color .5s,box-shadow .5s;
   display:flex;
@@ -766,26 +776,41 @@ section {
 }
 /* ---------- form / cta ---------- */
 #join {
-  overflow:hidden
+  overflow:hidden;
+  z-index:auto;
+}
+#join .wrap {
+  position:relative;
+  z-index:3;
 }
 #join .join-bg {
   position:absolute;
   inset:0;
   background-size:cover;
   background-position:center;
-  opacity:.22
+  opacity:.22;
+  z-index:1;
 }
 #join .join-veil {
   position:absolute;
   inset:0;
-  background:linear-gradient(180deg,var(--ink) 0%,rgba(7,7,12,.6) 40%,var(--ink) 100%)
+  background:linear-gradient(180deg,var(--ink) 0%,rgba(7,7,12,.65) 50%,var(--ink) 100%);
+  z-index:1;
 }
 .join-card {
   position:relative;
-  z-index:2;
-  max-width:920px;
+  z-index:3;
+  max-width:var(--maxw);
   margin:0 auto;
-  text-align:center
+  text-align:center;
+  padding:50px 60px;
+  border-radius:24px;
+  border:1px solid var(--line-2);
+  background:linear-gradient(180deg,var(--ink-3) 0%,var(--ink-2) 100%);
+  box-shadow:0 30px 60px -20px rgba(0,0,0,0.8)
+}
+#join .eyebrow {
+  margin-bottom:34px;
 }
 .join-card h2 {
   font-size:clamp(34px,5.4vw,62px)
@@ -816,7 +841,7 @@ form.trial .full {
   width: 100%;
   padding: 26px 18px 10px;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--ink);
   border: 1px solid var(--line-2);
   color: var(--cream);
   font-family: inherit;
@@ -847,7 +872,7 @@ form.trial .full {
 .field.floating textarea:focus {
   outline: 0;
   border-color: var(--gold-2);
-  background: rgba(245, 185, 66, 0.06);
+  background: var(--ink-2);
 }
 .field.floating input:focus ~ label,
 .field.floating input:not(:placeholder-shown) ~ label,
@@ -932,7 +957,7 @@ form.trial .full {
   padding:16px 18px;
   border:1px solid var(--line-2);
   border-radius:13px;
-  background:var(--panel);
+  background:var(--ink-2);
   font-size:15px;
   color:#dcdce4;
   transition:border-color .3s
@@ -1000,24 +1025,7 @@ footer {
   margin-top:30px;
   text-align:center
 }
-/* floating whatsapp */
-.fab {
-  position:fixed;
-  right:24px;
-  bottom:24px;
-  z-index:55;
-  width:58px;
-  height:58px;
-  border-radius:50%;
-  display:grid;
-  place-items:center;
-  background:#25d366;
-  box-shadow:0 12px 30px -8px rgba(37,211,102,.6);
-  transition:transform .35s var(--ease)
-}
-.fab:hover {
-  transform:scale(1.08)
-}
+
 /* reveal */
 .reveal {
   opacity:0;
@@ -1066,6 +1074,9 @@ footer {
   }
   .dir-grid {
     grid-template-columns: 1fr;
+  }
+  .join-card {
+    padding: 36px 20px;
   }
 }
 @media(max-width:640px) {
@@ -1130,16 +1141,7 @@ footer {
 .mobile-menu a:hover {
   color:var(--gold-1)
 }
-.mobile-menu .close {
-  position:absolute;
-  top:24px;
-  right:24px;
-  font-size:30px;
-  color:var(--muted);
-  background:0;
-  border:0;
-  cursor:pointer
-}
+
 @media(prefers-reduced-motion:reduce) {
   * {
   animation-duration:.001ms!important;
@@ -1153,4 +1155,20 @@ footer {
   opacity:1;
   transform:none
 }
+}
+
+/* Text shadow mask for SVG lines */
+.about-copy h2,
+.about-copy .about-lead,
+.about-copy p.body,
+.feats li,
+.shead h2,
+.shead p,
+.c-block h3,
+.c-block .c-big,
+.c-block .c-mail,
+.c-block .c-meta,
+.join-card h2,
+.join-card .sub {
+  text-shadow: 0 0 12px var(--ink), 0 0 24px var(--ink), 0 0 4px var(--ink);
 }
