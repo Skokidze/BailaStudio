@@ -167,6 +167,11 @@ section {
   backdrop-filter:blur(16px) saturate(140%);
   border-bottom:1px solid var(--line-2);
 }
+.nav-logo {
+  text-decoration:none!important;
+  border-bottom:none!important;
+  outline:none
+}
 .nav-logo .logo-img {
   width:108px;
   height:39px;
